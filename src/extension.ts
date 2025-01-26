@@ -5,10 +5,12 @@ import { commitChanges, initializeGit } from "./services/git-helper";
 
 dotenv.config();
 
+const COMMIT_INTERVAL = 60 * 1000; // 1 minute
+
 function getCommitIntervalFromSettings(): number {
   const config = vscode.workspace.getConfiguration("gitAutoCommit");
   const interval = config.get<number>("interval") || 1; // Default to 1 minute if not set
-  return interval;
+  return interval * 60 * 1000;
 }
 
 /**
@@ -17,7 +19,7 @@ function getCommitIntervalFromSettings(): number {
 async function autoCommit(
   workspacePath: string,
   git: SimpleGit,
-  interval: number = 60 * 1000
+  interval: number
 ) {
   const intervalId = setInterval(async () => {
     await commitChanges(workspacePath, git);
@@ -30,7 +32,7 @@ async function autoCommit(
  * Activates the VS Code extension by setting up Git initialization and auto-committing.
  */
 export async function activate(context: vscode.ExtensionContext) {
-  const commitInterval = getCommitIntervalFromSettings() * 60 * 1000;
+  const commitInterval = getCommitIntervalFromSettings();
 
   const workspaceFolders = vscode.workspace.workspaceFolders;
 
