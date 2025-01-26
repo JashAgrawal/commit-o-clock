@@ -30,8 +30,6 @@ ${changesSummary}
 
 summarize the work done in the last 30 minutes and give me best suitable commit message for it describing the work done in the best and shortest way possible,
  No jargon, No other shit, Just commit message in below format".
- if you find it impossible to summraize cause data isn't sufficient or anything .
- Send message as  "DATA-NOT-SUFFICIENT" just this much . other wise work with your flow (try to avoid this).
 example commit message :
  feat: add a new feature
 
@@ -51,11 +49,10 @@ example commit message :
   `;
 
   try {
+    console.log(prompt);
     const aiResponse = await model.generateContent(prompt); // Replace with actual Gemini AI call
     const message = aiResponse.response.text();
-    if (message.includes("DATA-NOT-SUFFICIENT")) {
-      throw new Error("Data not suffient");
-    }
+    console.log(message);
     return message.trim();
   } catch (error) {
     console.error("Error generating commit message with AI:", error);
