@@ -5,11 +5,9 @@ import { commitChanges, initializeGit } from "./services/git-helper";
 
 dotenv.config();
 
-let COMMIT_INTERVAL = 60 * 1000; // 1 minute
-
 function getCommitIntervalFromSettings(): number {
   const config = vscode.workspace.getConfiguration("gitAutoCommit");
-  const interval = config.get<number>("interval") || 60 * 1000; // Default to 1 minute if not set
+  const interval = config.get<number>("interval") || 1; // Default to 1 minute if not set
   return interval;
 }
 
@@ -19,7 +17,7 @@ function getCommitIntervalFromSettings(): number {
 async function autoCommit(
   workspacePath: string,
   git: SimpleGit,
-  interval: number = COMMIT_INTERVAL
+  interval: number = 60 * 1000
 ) {
   const intervalId = setInterval(async () => {
     await commitChanges(workspacePath, git);
