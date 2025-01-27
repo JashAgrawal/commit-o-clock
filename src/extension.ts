@@ -33,6 +33,14 @@ async function autoCommit(
  */
 export async function activate(context: vscode.ExtensionContext) {
   const commitInterval = getCommitIntervalFromSettings();
+  const config = vscode.workspace.getConfiguration("gitAutoCommit");
+  const inviteCode = config.get<string>("inviteCode") || "";
+  if (inviteCode !== "COMMIE") {
+    vscode.window.showErrorMessage(
+      "Please setup inviteCode in vscode settings to continue to use the settings"
+    );
+    return;
+  }
 
   const workspaceFolders = vscode.workspace.workspaceFolders;
 
