@@ -28,10 +28,6 @@ description:
 why's this feature/fix needed?
 - <reason for the changes>
 
-if(feat){
-- Progress: [#####-----] <rating>/10
-}
-
 if(fix){
 - Before: <describe issue before the fix>
 - After: <describe improvement after the fix>

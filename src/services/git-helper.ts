@@ -91,9 +91,9 @@ export async function commitChanges(workspacePath: string, git: SimpleGit) {
     const now = new Date();
 
     await git.commit(
-      `${moment(now).format("ll LT")} - ${
-        commitMessage.split("\n")[0]
-      }\n\n${commitMessage}`
+      `${commitMessage.split("\n")[0]}\n\n ${moment(now).format(
+        "ll LT"
+      )} -${commitMessage}`
     );
 
     vscode.window.showInformationMessage(
