@@ -93,7 +93,9 @@ export async function commitChanges(workspacePath: string, git: SimpleGit) {
     await git.commit(
       `${commitMessage.split("\n")[0]}\n\n ${moment(now).format(
         "ll LT"
-      )} -${commitMessage}`
+      )} -${commitMessage}
+      Auto commited by - Commit-O-Clock Extension .
+      `
     );
 
     vscode.window.showInformationMessage(
