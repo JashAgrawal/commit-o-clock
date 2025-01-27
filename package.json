@@ -30,12 +30,17 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Git Auto-Commit Extension",
+      "title": "Commit-o-Clock",
       "properties": {
         "gitAutoCommit.interval": {
           "type": "number",
           "default": 30,
           "description": "Commit interval in minutes. Set to 30 for 30 minutes, 60 for 1 hour, etc."
+        },
+        "gitAutoCommit.inviteCode": {
+          "type": "string",
+          "default": "INVITECODEHERE",
+          "description": "Invite code to test the beta of Commit-o-clock"
         }
       }
     }
