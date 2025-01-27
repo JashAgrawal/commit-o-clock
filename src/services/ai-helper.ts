@@ -7,7 +7,7 @@ Description: bullet points summarizing the key changes made in this commit. (max
 Reason for Changes: A brief explanation of why this feature/fix is necessary.
 If Feature: Predict the progress of the feature using a progress bar (out of 10).
 If Fix: Clearly state the before vs after effects of the bug fix.
-Ensure clarity, no jargon, and relevance. Focus on precise details to aid future reference.
+Ensure clarity, no jargon, and relevance.Dont focus much of last commit message to write commit message they are just for refrence like if we just had more progress in last module so what was the last module Focus on precise details to aid future reference.
 
 Prompt Example
 Prompt:
