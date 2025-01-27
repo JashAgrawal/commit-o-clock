@@ -70,7 +70,7 @@ export async function activate(context: vscode.ExtensionContext) {
     })
   );
 
-  vscode.window.showInformationMessage("Git Extension Activated!");
+  vscode.window.showInformationMessage("Commit-o-clock Extension Activated!");
 }
 
 /**
@@ -78,5 +78,5 @@ export async function activate(context: vscode.ExtensionContext) {
  */
 export function deactivate() {
   console.log("Git Extension Deactivated!");
-  vscode.window.showInformationMessage("Git Extension Activated!");
+  vscode.window.showInformationMessage("Commit-o-clock Extension Deavtivated!");
 }
