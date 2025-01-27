@@ -9,7 +9,6 @@ commit-o-clock is a VS Code extension that tracks all code changes in your works
 - **Automatic Change Tracking**: Detects file changes, additions, and deletions in real time.
 - **AI-Generated Commit Messages**: Uses Gemini AI to generate concise and relevant commit messages summarizing the work done in the interval.
 - **Customizable Time Intervals**: Automatically commits changes every 30 minutes (default), which can be adjusted in the code.
-- **Seamless Integration**: Maintains a separate `commit-o-clock` folder in your workspace for tracking changes, leaving your main project untouched.
 - **Works with Any Workspace**: Compatible with all VS Code projects.
 
 ---
@@ -18,10 +17,7 @@ commit-o-clock is a VS Code extension that tracks all code changes in your works
 
 Before using this extension, ensure the following tools are installed on your system:
 
-1. **Node.js**: [Download and Install](https://nodejs.org/)
-2. **Git**: [Download and Install](https://git-scm.com/)
-3. **Gemini AI API Key**: Create an account and obtain your API key from [Gemini AI](https://gemini-ai.com/).
-4. **VS Code**: [Download and Install](https://code.visualstudio.com/)
+1. **VS Code**: [Download and Install](https://code.visualstudio.com/)
 
 ---
 
