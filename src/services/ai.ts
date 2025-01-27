@@ -1,12 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as dotenv from "dotenv";
+import { systemInstruction } from "./ai-helper";
 
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_API_KEY || "AIzaSyC_ZXJb3JgX1Bj09JNcWBfXhefoTbSBrkQ"
 );
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash-8b",
+  systemInstruction: systemInstruction,
+});
 
 /**
  * Generates a commit message using AI based on file diffs and the last commit message.
@@ -21,31 +25,11 @@ export async function generateCommitMessage(
     .join("\n\n");
 
   const prompt = `
-Last Commit Message (just for refrence of what we did last time the new message should describe the changes done in this commit):
-"${lastCommitMessage}"
+  Last Commit Message: 
+  ${lastCommitMessage}
 
-Current Changes (git diff of the changes):
-${changesSummary}
-
-
-summarize the work done in the last 30 minutes and give me best suitable commit message for it describing the work done in the best and shortest way possible,
- No jargon, No other shit, Just commit message in below format".
-example commit message :
- feat: add a new feature
-
- description:
- in short 1 liner bullet points here not much details
-
- why's this feature/fix needed?
-
- if(feat){
-  predict the status of the work being done here and rate its progress in the below format (out of 10 like)
-  eg:-[#####-----] 5/10
- }
-
- if(fix){
- before vs after effects.
- }
+  Current Changes:
+  ${changesSummary}
   `;
 
   try {
