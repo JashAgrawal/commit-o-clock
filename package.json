@@ -24,8 +24,24 @@
   "contributes": {
     "commands": [
       {
-        "command": "commit-o-clock.aiCommit",
+        "command": "extension.aiCommit",
         "title": "AI Commit"
+      },
+      {
+        "command": "extension.toggleAutoCommit",
+        "title": "Toggle Auto-Commit"
+      },
+      {
+        "command": "extension.toggleScheduledCommit",
+        "title": "Schedule Daily Commit"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.aiCommit",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorTextFocus"
       }
     ],
     "configuration": {
@@ -41,6 +57,21 @@
           "type": "string",
           "default": "INVITECODEHERE",
           "description": "Invite code to test the beta of Commit-o-clock"
+        },
+        "gitAutoCommit.autoCommitEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable automatic commits"
+        },
+        "gitAutoCommit.scheduledTime": {
+          "type": "string",
+          "default": "",
+          "description": "Schedule daily commits at specific time (24-hour format, e.g., '14:30' for 2:30 PM)"
+        },
+        "gitAutoCommit.useScheduledCommit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable scheduled commits at specific time"
         }
       }
     }
