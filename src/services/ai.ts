@@ -21,7 +21,7 @@ export async function generateCommitMessage(
 
     // Prepare the context from file diffs
     const diffContext = Array.from(fileDiffs.entries())
-      .map(([file, diff]) => `File: ${file}\nDiff:\n${diff}`)
+      .map(([file, diff]) => `File: ${file}\nChanges:\n${diff}`)
       .join("\n\n");
 
     // Set the format from system instruction and build the complete prompt

@@ -76,10 +76,10 @@ After: Handle errors gracefully with retries`
     },
 
     INPUT_TEMPLATE: `
-Last Commit Message (for reference):
+Last Commit Message:
 {lastCommitMessage}
 
-Current Changes (git diff):
+Current Changes:
 {diffSummary}
 `
 } as const;
