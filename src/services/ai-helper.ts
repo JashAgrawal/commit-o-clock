@@ -117,7 +117,6 @@ so what was the last module Focus on precise details to aid future reference.`;
 
 export const endingSystemInstruction = `
 Based on the git diff and last commit message provided, generate a commit message that follows this format.`;
-
 export const inputTemplate = `
 Prompt:
 Analyze the given details and generate a commit message:
@@ -127,7 +126,6 @@ Last Commit Message (for reference):
 
 Current Changes (git diff of the changes):
 <Insert git diff summary>`;
-
 export const defaultExample1 = `
 Input :- ${inputTemplate}
 Output :- 
@@ -140,7 +138,6 @@ feat(auth): implement JWT authentication
 
 BREAKING CHANGE: Authentication header now requires Bearer token
 `;
-
 export const defaultExample2 = `
 Input :- ${inputTemplate}
 Output :- 

@@ -75,8 +75,9 @@
         },
         "gitAutoCommit.commitFormat": {
           "type": "string",
-          "default": "type(scope): description\n\nBody explaining the changes in detail.\n\nFooter with references and breaking changes.",
-          "description": "Format template for commit messages. Use placeholders like 'type', 'scope', 'description', etc."
+          "default": "Comming Soon :- type(scope): description\n\nBody explaining the changes in detail.\n\nFooter with references and breaking changes.",
+          "description": "Format template for commit messages. Use placeholders like 'type', 'scope', 'description', etc.",
+          "readOnly": true
         }
       }
     }
