@@ -4,4 +4,4 @@ node_modules
 .vscode-test/
 *.vsix
 .env
-.vscode/launch.json
+# .vscode/launch.json
