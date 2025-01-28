@@ -84,15 +84,15 @@ export async function commitChanges(workspacePath: string, git: SimpleGit) {
   const lastCommitMessage = await getLastCommitMessage(git);
   
   // Get the current system instruction for commit format
-  const systemInstruction = getCurrentSystemInstruction();
-  if (!systemInstruction) {
-    updateSystemInstruction(); // Initialize if not already done
-  }
+  // const systemInstruction = getCurrentSystemInstruction();
+  // if (!systemInstruction) {
+  //   updateSystemInstruction(); // Initialize if not already done
+  // }
   
   const commitMessage = await generateCommitMessage(
     fileDiffs,
     lastCommitMessage,
-    systemInstruction
+    // systemInstruction
   );
 
   try {

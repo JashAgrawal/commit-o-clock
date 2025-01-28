@@ -1,10 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PromptBuilder } from "./promptBuilder";
 import * as dotenv from "dotenv";
+import { systemInstruction } from "./ai-helper";
 
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b",systemInstruction:systemInstruction });
 const promptBuilder = new PromptBuilder();
 
 /**
@@ -13,11 +15,9 @@ const promptBuilder = new PromptBuilder();
 export async function generateCommitMessage(
   fileDiffs: Map<string, string>,
   lastCommitMessage: string,
-  systemInstruction: string
+  // systemInstruction: string
 ): Promise<string> {
   try {
-    console.log(systemInstruction);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b",systemInstruction });
 
     // Prepare the context from file diffs
     const diffContext = Array.from(fileDiffs.entries())
