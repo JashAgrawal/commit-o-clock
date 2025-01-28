@@ -16,7 +16,8 @@ export async function generateCommitMessage(
   systemInstruction: string
 ): Promise<string> {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
+    console.log(systemInstruction);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b",systemInstruction });
 
     // Prepare the context from file diffs
     const diffContext = Array.from(fileDiffs.entries())
@@ -24,9 +25,8 @@ export async function generateCommitMessage(
       .join("\n\n");
 
     // Set the format from system instruction and build the complete prompt
-    promptBuilder.setFormat(systemInstruction);
-    const prompt = promptBuilder.buildCompletePrompt(lastCommitMessage, diffContext);
-
+    const prompt = promptBuilder.buildInputPrompt(lastCommitMessage, diffContext);
+    console.log(prompt);
     const result = await model.generateContent(prompt);
     const response = result.response;
     const commitMessage = response.text();

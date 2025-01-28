@@ -43,7 +43,10 @@ to generate a concise and meaningful commit message.`,
 4. Highlight breaking changes and effects
 5. Use bullet points for key changes (max 4 points)
 6. Avoid jargon and maintain clarity
-7. Focus on the current changes, not the last commit`,
+7. Focus on the current changes, not the last commit
+8. If some section is missing in format , DO NOT ADD IT IN GENERATED MESSAGE AS WELL
+`,
+
 
     FORMAT_DESCRIPTION: `
 type: Type of change (e.g., feat, fix, docs, style, refactor, perf, test, chore)
