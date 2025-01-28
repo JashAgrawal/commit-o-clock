@@ -139,6 +139,29 @@ export async function activate(context: vscode.ExtensionContext) {
       });
     }
 
+    // Listen for configuration changes
+    context.subscriptions.push(
+      vscode.workspace.onDidChangeConfiguration(async (e) => {
+        if (e.affectsConfiguration('gitAutoCommit.interval')) {
+          // Stop existing auto-commit
+          stopAutoCommit(workspacePath);
+          
+          // Get new interval and restart if enabled
+          const newInterval = getCommitIntervalFromSettings();
+          const isEnabled = getAutoCommitEnabledFromSettings();
+          
+          if (isEnabled) {
+            const newIntervalId = await startAutoCommit(workspacePath, git, newInterval);
+            context.subscriptions.push({
+              dispose: () => {
+                clearInterval(newIntervalId);
+              },
+            });
+          }
+        }
+      })
+    );
+
     // Set up scheduled commit if enabled
     if (scheduledCommitSettings.enabled && scheduledCommitSettings.time) {
       const timeoutId = await scheduleCommit(
