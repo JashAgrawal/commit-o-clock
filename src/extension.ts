@@ -56,7 +56,8 @@ async function scheduleCommit(
   const timeoutId = setTimeout(async () => {
     await commitChanges(workspacePath, git);
     // Schedule next day's commit after completing this one
-    scheduleCommit(workspacePath, git, timeStr);
+    const nextTimeoutId = await scheduleCommit(workspacePath, git, timeStr);
+    scheduledCommitTimeouts.set(workspacePath, nextTimeoutId);
   }, msUntilNextCommit);
 
   return timeoutId;
@@ -158,8 +159,35 @@ export async function activate(context: vscode.ExtensionContext) {
               },
             });
             vscode.window.showInformationMessage("Auto-commit set to every " + newInterval / 60000 + " minutes!");
-          }else{
+          } else {
             vscode.window.showErrorMessage("Auto-commit disabled!");
+          }
+        }
+
+        // Handle scheduled commit configuration changes
+        if (e.affectsConfiguration('gitAutoCommit.useScheduledCommit') || 
+            e.affectsConfiguration('gitAutoCommit.scheduledTime')) {
+          // Clear existing scheduled commit
+          const existingTimeoutId = scheduledCommitTimeouts.get(workspacePath);
+          if (existingTimeoutId) {
+            clearTimeout(existingTimeoutId);
+            scheduledCommitTimeouts.delete(workspacePath);
+          }
+
+          // Get new scheduled commit settings
+          const settings = getScheduledCommitSettings();
+          
+          if (settings.enabled && settings.time) {
+            const newTimeoutId = await scheduleCommit(workspacePath, git, settings.time);
+            scheduledCommitTimeouts.set(workspacePath, newTimeoutId);
+            context.subscriptions.push({
+              dispose: () => {
+                clearTimeout(newTimeoutId);
+              },
+            });
+            vscode.window.showInformationMessage(`Scheduled commit set for ${settings.time} daily!`);
+          } else {
+            vscode.window.showInformationMessage("Scheduled commit disabled!");
           }
         }
       })
