@@ -1,9 +1,20 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PromptBuilder } from "./promptBuilder";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+import * as vscode from "vscode";
 
 const promptBuilder = new PromptBuilder();
+
+// Check if Gemini API key exists
+if (!process.env.GEMINI_API_KEY) {
+  vscode.window.showErrorMessage(
+    "GEMINI_API_KEY not found in environment variables. Please add it to your .env file."
+  );
+  throw new Error(
+    "GEMINI_API_KEY not found in environment variables. Please add it to your .env file."
+  );
+}
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 /**
  * Generates a commit message using AI based on file diffs and the last commit message.
