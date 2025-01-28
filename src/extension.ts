@@ -5,7 +5,6 @@ import { commitChanges, initializeGit } from "./services/git-helper";
 
 dotenv.config();
 
-const COMMIT_INTERVAL = 60 * 1000; // 1 minute
 const autoCommitIntervals = new Map<string, NodeJS.Timeout>();
 const scheduledCommitTimeouts = new Map<string, NodeJS.Timeout>();
 

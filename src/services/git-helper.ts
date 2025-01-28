@@ -4,6 +4,7 @@ import moment from "moment";
 import * as fs from "fs";
 import * as path from "path";
 import { generateCommitMessage } from "./ai";
+import { getCurrentSystemInstruction, updateSystemInstruction } from "./ai-service";
 
 /**
  * Initializes Git in the workspace if not already initialized.
@@ -81,27 +82,32 @@ export async function commitChanges(workspacePath: string, git: SimpleGit) {
   }
 
   const lastCommitMessage = await getLastCommitMessage(git);
+  
+  // Get the current system instruction for commit format
+  const systemInstruction = getCurrentSystemInstruction();
+  if (!systemInstruction) {
+    updateSystemInstruction(); // Initialize if not already done
+  }
+  
   const commitMessage = await generateCommitMessage(
     fileDiffs,
-    lastCommitMessage
+    lastCommitMessage,
+    systemInstruction
   );
 
   try {
     await git.add(Array.from(fileDiffs.keys())); // Stage only the changed files
     const now = new Date();
 
-    await git.commit(
-      `${commitMessage.split("\n")[0]}\n\n ${moment(now).format(
-        "ll LT"
-      )} -${commitMessage}
-      Auto commited by - Commit-O-Clock Extension .
-      `
-    );
+    await git.commit(commitMessage);
 
     vscode.window.showInformationMessage(
       `Changes committed in ${workspacePath}`
     );
   } catch (error) {
     console.error("Error committing changes:", error);
+    vscode.window.showErrorMessage(
+      `Failed to commit changes in ${workspacePath}: ${error}`
+    );
   }
 }
