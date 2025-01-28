@@ -157,6 +157,9 @@ export async function activate(context: vscode.ExtensionContext) {
                 clearInterval(newIntervalId);
               },
             });
+            vscode.window.showInformationMessage("Auto-commit set to every " + newInterval / 60000 + " minutes!");
+          }else{
+            vscode.window.showInformationMessage("Auto-commit disabled!");
           }
         }
       })
