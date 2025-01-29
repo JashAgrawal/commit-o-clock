@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PromptBuilder } from "./promptBuilder";
 import { systemInstruction } from "./ai-helper";
+import { DEFAULT_SYSTEM_INSTRUCTION } from "./ai-service";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
@@ -22,7 +23,7 @@ export async function generateCommitMessage(
 
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-8b",
-      systemInstruction: systemInstruction,
+      systemInstruction: DEFAULT_SYSTEM_INSTRUCTION,
     });
 
     const prompt = promptBuilder.buildInputPrompt(

@@ -80,10 +80,7 @@ ${examplesText}
    * Build the input prompt with the actual git changes
    */
   buildInputPrompt(lastCommitMessage: string, diffSummary: string): string {
-    return PROMPT_SECTIONS.INPUT_TEMPLATE.replace(
-      "{lastCommitMessage}",
-      lastCommitMessage
-    ).replace("{diffSummary}", diffSummary);
+    return PROMPT_SECTIONS.INPUT_TEMPLATE.replace("{diffSummary}", diffSummary);
   }
 
   /**
