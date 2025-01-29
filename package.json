@@ -72,12 +72,6 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable scheduled commits at specific time"
-        },
-        "gitAutoCommit.commitFormat": {
-          "type": "string",
-          "default": "Comming Soon :- type(scope): description\n\nBody explaining the changes in detail.\n\nFooter with references and breaking changes.",
-          "description": "Format template for commit messages. Use placeholders like 'type', 'scope', 'description', etc.",
-          "readOnly": true
         }
       }
     }
