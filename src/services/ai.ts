@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PromptBuilder } from "./promptBuilder";
+import { systemInstruction } from "./ai-helper";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
@@ -10,8 +11,8 @@ const promptBuilder = new PromptBuilder();
  */
 export async function generateCommitMessage(
   fileDiffs: Map<string, string>,
-  lastCommitMessage: string,
-  systemInstruction: string
+  lastCommitMessage: string
+  // systemInstruction: string
 ): Promise<string> {
   try {
     // Prepare the context from file diffs
