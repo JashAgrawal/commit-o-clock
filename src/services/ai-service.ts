@@ -68,8 +68,8 @@ export function getCurrentSystemInstruction(): string {
 }
 
 // Listen for configuration changes
-vscode.workspace.onDidChangeConfiguration((e) => {
-  if (e.affectsConfiguration("gitAutoCommit.commitFormat")) {
-    updateSystemInstruction();
-  }
-});
+// vscode.workspace.onDidChangeConfiguration((e) => {
+//   if (e.affectsConfiguration("gitAutoCommit.commitFormat")) {
+//     updateSystemInstruction();
+//   }
+// });
